@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f8">
+  <meta name="description" content="使用 GLB 模型的轻量级响应式 3D 产品预览组件">
+  <title>3D 产品模型展示 · GLB Viewer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+  <script src="js/viewer.js" defer></script>
+</head>
+<body>
+  <main class="layout">
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">INTERACTIVE 3D VIEWER</p>
+        <h1>3D 产品展示</h1>
+        <p class="subtitle">拖动旋转 · 滚轮缩放 · 查看每个细节</p>
+      </div>
+      <span class="file-tag">GLB · 3D</span>
+    </header>
+
+    <section class="viewer" aria-label="3D 产品模型查看器">
+      <div class="viewer-top"><span class="live-dot"></span>交互式 3D 模型<span class="viewer-top-right">自由视角</span></div>
+      <div class="stage">
+        <model-viewer id="modelViewer"
+          src="models/MaterialsVariantsShoe.glb"
+          alt="一双可自由旋转查看的 3D 鞋子模型"
+          camera-controls
+          touch-action="pan-y"
+          shadow-intensity="0.8"
+          exposure="1.05"
+          environment-image="neutral"
+          camera-orbit="35deg 70deg auto"
+          min-field-of-view="15deg"
+          max-field-of-view="60deg"
+          field-of-view="30deg"
+          interaction-prompt="none"
+          loading="eager">
+          <div class="loading-overlay" id="loadingOverlay" slot="poster">
+            <div class="loading-spinner"></div><p>正在准备 3D 模型…</p>
+          </div>
+          <div class="load-progress" slot="progress-bar"><div id="loadProgress"></div></div>
+        </model-viewer>
+        <div class="stage-hint" id="stageHint">↔ 拖动旋转 · 滚轮缩放</div>
+        <div class="error-message" id="errorMessage" hidden role="alert">模型加载失败。请检查网络连接，或通过本地服务器加载模型文件。</div>
+      </div>
+      <div class="viewer-footer">
+        <div class="model-status" id="statusText" aria-live="polite">正在加载模型…</div>
+        <div class="actions">
+          <button id="zoomOut" class="icon-btn" type="button" title="缩小" aria-label="缩小">−</button>
+          <button id="zoomIn" class="icon-btn" type="button" title="放大" aria-label="放大">+</button>
+          <button id="autoRotate" class="primary-btn" type="button" aria-pressed="false">▶ <span>自动旋转</span></button>
+          <button id="resetView" class="icon-btn" type="button" title="重置视角" aria-label="重置视角">↺</button>
+          <button id="fullscreen" class="icon-btn" type="button" title="全屏查看" aria-label="全屏查看">⛶</button>
+        </div>
+      </div>
+    </section>
+    <p class="bottom-note">GLB 模型 · 实时 3D 渲染 · 支持桌面及触屏设备</p>
+  </main>
+</body>
+</html>
